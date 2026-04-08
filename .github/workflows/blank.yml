@@ -31,6 +31,12 @@ jobs:
         with:
           name: maven-jar
           path: target/*.jar
+          
+      - name: Download JAR artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: maven-jar
+          path: target
 
       - name: Build Docker Image
         working-directory: docker
