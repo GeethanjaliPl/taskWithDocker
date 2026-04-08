@@ -33,6 +33,7 @@ jobs:
           path: target/*.jar
 
       - name: Build Docker Image
+        working-directory: docker
         run: docker build -t hello-world-app .
 
       - name: Push Docker Image
