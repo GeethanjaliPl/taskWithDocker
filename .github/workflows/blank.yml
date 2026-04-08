@@ -31,11 +31,28 @@ jobs:
         with:
           name: maven-jar
           path: target/*.jar
+          
+      - name: Download JAR artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: maven-jar
+          path: target
 
+      - name: Login Docker
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Set version
+        run: echo "TAG=v${{ github.run_number }}" >> $GITHUB_ENV
+        
       - name: Build Docker Image
-        run: docker build -t hello-world-app .
+        run: |
+         docker build -f docker/Dockerfile \
+         -t geethapl/hello-world-app:latest \
+         -t geethapl/hello-world-app:${{ env.TAG }} .
 
-      - name: Push Docker Image
-        run: docker push geethapl/hello-world-app:latest
+      - name: Push Docker Images
+        run: |
+         docker push geethapl/hello-world-app:latest
+         docker push geethapl/hello-world-app:${{ env.TAG }}
 
 
