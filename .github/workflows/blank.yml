@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Compile Java
-        run: javac HelloWorld.java
+        run: javac src/main/java/HelloWorld.java
 
       - name: Build JAR with Maven
         run: mvn clean package
