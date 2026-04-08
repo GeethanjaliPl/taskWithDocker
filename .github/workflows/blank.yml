@@ -1,7 +1,6 @@
 name: Docker Pipeline
 
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
@@ -21,9 +20,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Compile Java
-        run: javac src/main/java/HelloWorld.java
-
       - name: Build JAR with Maven
         run: mvn clean package
 
@@ -35,5 +31,11 @@ jobs:
         with:
           name: maven-jar
           path: target/*.jar
+
+      - name: Build Docker Image
+        run: docker build -t hello-world-app .
+
+      - name: Push Docker Image
+        run: docker push geethapl/hello-world-app:latest
 
 
