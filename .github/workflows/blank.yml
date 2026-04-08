@@ -39,8 +39,7 @@ jobs:
           path: target
 
       - name: Build Docker Image
-        working-directory: docker
-        run: docker build -t hello-world-app .
+        run: docker build -f docker/Dockerfile -t hello-world-app .
 
       - name: Push Docker Image
         run: docker push geethapl/hello-world-app:latest
