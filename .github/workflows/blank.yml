@@ -36,7 +36,9 @@ jobs:
         run: echo "TAG=v${{ github.run_number }}" >> $GITHUB_ENV
 
       - name: Build Docker Image via Compose
-        run: docker compose -f docker-compose.yml build --no-cache
+        run: |
+          docker-compose down -v
+          docker compose -f docker-compose.yml build --no-cache
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
