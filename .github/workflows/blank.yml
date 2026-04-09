@@ -44,11 +44,12 @@ jobs:
       - name: Set version
         run: echo "TAG=v${{ github.run_number }}" >> $GITHUB_ENV
         
-      - name: Build Docker Image
+      - name: Build Docker Image via Compose
+        run: docker compose -f docker/docker-compose.yml build
+
+      - name: Tag Docker Image
         run: |
-         docker build -f docker/Dockerfile \
-         -t geethapl/hello-world-app:latest \
-         -t geethapl/hello-world-app:${{ env.TAG }} .
+          docker tag geethapl/hello-world-app:latest geethapl/hello-world-app:${{ env.TAG }}
 
       - name: Push Docker Images
         run: |
