@@ -2,7 +2,7 @@ name: CI-CD Pipeline (ECR + EKS)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   TAG: v${{ github.run_number }}
@@ -21,8 +21,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
 
       - name: Build JAR with Maven
         run: mvn clean package
@@ -59,7 +59,6 @@ jobs:
           IMAGE_URI=$ECR_REGISTRY/gee-ecr:${{ env.TAG }}
           docker push $IMAGE_URI
           echo "image=$IMAGE_URI" >> $GITHUB_OUTPUT
-
 
   deploy:
     needs: build
