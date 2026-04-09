@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-world-app
-  namespace: dev  
+  namespace: geetha  
 spec:
   replicas: 1
   selector:
@@ -36,7 +36,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: java-app-service
-  namespace: dev
+  namespace: geetha
 spec:
   selector:
     app: hello-world-app

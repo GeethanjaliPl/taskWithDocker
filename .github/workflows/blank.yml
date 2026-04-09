@@ -107,10 +107,10 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl apply -f docker/manifest.yml -n dev
+        kubectl apply -f docker/manifest.yml -n geetha
 
     - name: Verify Deployment
       run: |
-        kubectl rollout status deployment/hello-world-app -n dev
+        kubectl rollout status deployment/hello-world-app -n geetha
 
 
