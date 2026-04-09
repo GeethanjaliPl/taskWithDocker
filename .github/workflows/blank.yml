@@ -2,7 +2,9 @@ name: CI-CD Pipeline (ECR + EKS)
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 env:
   TAG: v${{ github.run_number }}
