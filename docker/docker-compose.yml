@@ -15,6 +15,8 @@ services:
     environment:
       DB_HOST: db
       REDIS_HOST: redis
+    networks:
+      - app-network
 
 
   db:
@@ -29,6 +31,8 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
   # 🔹 3. Redis Backend Service
   redis:
@@ -38,9 +42,16 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    networks:
+      - app-network
 
 # 🔸 Volumes
 volumes:
   db_data:
   redis_data:
   app_data:
+
+networks:
+  app-network:
+    name: my-custom-network
+    driver: bridge
