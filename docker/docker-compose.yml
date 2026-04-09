@@ -3,7 +3,7 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: geethapl/java-app:latest
+    image: geethapl/hello-world-app:latest
     container_name: java-app
     depends_on:
       - db
