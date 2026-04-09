@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  # 🔹 1. Java Application
+  app:
+    image: geethapl/java-app:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: java-app
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_data:/app
+    environment:
+      DB_HOST: db
+      REDIS_HOST: redis
+
+
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  # 🔹 3. Redis Backend Service
+  redis:
+    image: redis:7
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+# 🔸 Volumes
+volumes:
+  db_data:
+  redis_data:
+  app_data:
