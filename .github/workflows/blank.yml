@@ -83,6 +83,10 @@ jobs:
         run: |
           aws eks update-kubeconfig --region ap-south-1 --name demo-eks-cluster1
 
+      - name: Create Namespace
+        run: |
+          kubectl create namespace geetha || true
+
       - name: Update Image in Manifest
         run: |
           sed -i "s|IMAGE_PLACEHOLDER|${{ needs.build.outputs.image }}|g" docker/manifest.yml
