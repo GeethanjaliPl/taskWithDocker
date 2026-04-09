@@ -1,12 +1,9 @@
-version: "3.8"
-
 services:
-  # 🔹 1. Java Application
   app:
-    image: geethapl/java-app:latest
     build:
-      context: .
+      context: ..
       dockerfile: docker/Dockerfile
+    image: geethapl/java-app:latest
     container_name: java-app
     depends_on:
       - db
