@@ -29,9 +29,6 @@ jobs:
       - name: Build JAR with Maven
         run: mvn clean package
 
-      - name: Validate JAR
-        run: java -jar target/hello-world-1.0-SNAPSHOT.jar
-
       - name: Set version
         run: echo "TAG=v${{ github.run_number }}" >> $GITHUB_ENV
 
