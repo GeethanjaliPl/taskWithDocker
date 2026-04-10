@@ -1,7 +1,7 @@
 services:
   app:
     build:
-      context: ..
+      context: .
       dockerfile: docker/Dockerfile
     image: geethapl/hello-world-app:latest
     container_name: java-app
@@ -10,14 +10,11 @@ services:
       - redis
     ports:
       - "8080:8080"
-    volumes:
-      - app_data:/app
     environment:
       DB_HOST: db
       REDIS_HOST: redis
     networks:
       - app-network
-
 
   db:
     image: postgres:15
@@ -29,27 +26,16 @@ services:
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
     networks:
       - app-network
 
-  # 🔹 3. Redis Backend Service
   redis:
     image: redis:7
     container_name: redis-cache
     ports:
       - "6379:6379"
-    volumes:
-      - redis_data:/data
     networks:
       - app-network
-
-# 🔸 Volumes
-volumes:
-  db_data:
-  redis_data:
-  app_data:
 
 networks:
   app-network:
