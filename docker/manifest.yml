@@ -23,12 +23,6 @@ spec:
               value: "db"
             - name: REDIS_HOST
               value: "redis"
-          volumeMounts:
-            - name: app-data
-              mountPath: /app
-      volumes:
-        - name: app-data
-          emptyDir: {}
       restartPolicy: Always
 
 ---
